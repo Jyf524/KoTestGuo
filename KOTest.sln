@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KOTest", "KOTest\KOTest.csproj", "{9CF18658-C294-4F7B-BB68-2AEEC0F8D1B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KOTest.Repository", "KOTest.Repository\KOTest.Repository.csproj", "{27C5E631-C012-44BF-A457-3E0BEDF7F57E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KOTest.Service", "KOTest.Service\KOTest.Service.csproj", "{AD2F940D-4B14-4829-80CB-F9C604A9CFC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9CF18658-C294-4F7B-BB68-2AEEC0F8D1B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CF18658-C294-4F7B-BB68-2AEEC0F8D1B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CF18658-C294-4F7B-BB68-2AEEC0F8D1B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CF18658-C294-4F7B-BB68-2AEEC0F8D1B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27C5E631-C012-44BF-A457-3E0BEDF7F57E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27C5E631-C012-44BF-A457-3E0BEDF7F57E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27C5E631-C012-44BF-A457-3E0BEDF7F57E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27C5E631-C012-44BF-A457-3E0BEDF7F57E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD2F940D-4B14-4829-80CB-F9C604A9CFC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD2F940D-4B14-4829-80CB-F9C604A9CFC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD2F940D-4B14-4829-80CB-F9C604A9CFC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD2F940D-4B14-4829-80CB-F9C604A9CFC4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

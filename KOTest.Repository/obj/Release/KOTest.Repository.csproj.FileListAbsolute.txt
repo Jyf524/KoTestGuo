@@ -1,0 +1,8 @@
+H:\guolirongmvc\KOTest\KOTest.Repository\bin\Release\KOTest.Repository.dll.config
+H:\guolirongmvc\KOTest\KOTest.Repository\bin\Release\KOTest.Repository.dll
+H:\guolirongmvc\KOTest\KOTest.Repository\bin\Release\KOTest.Repository.pdb
+H:\guolirongmvc\KOTest\KOTest.Repository\bin\Release\EntityFramework.dll
+H:\guolirongmvc\KOTest\KOTest.Repository\bin\Release\EntityFramework.xml
+H:\guolirongmvc\KOTest\KOTest.Repository\bin\Release\zh-Hans\EntityFramework.resources.dll
+H:\guolirongmvc\KOTest\KOTest.Repository\obj\Release\KOTest.Repository.dll
+H:\guolirongmvc\KOTest\KOTest.Repository\obj\Release\KOTest.Repository.pdb

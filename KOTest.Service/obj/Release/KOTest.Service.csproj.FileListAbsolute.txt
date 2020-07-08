@@ -1,0 +1,11 @@
+H:\guolirongmvc\KOTest\KOTest.Service\bin\Release\KOTest.Service.dll.config
+H:\guolirongmvc\KOTest\KOTest.Service\bin\Release\KOTest.Service.dll
+H:\guolirongmvc\KOTest\KOTest.Service\bin\Release\KOTest.Service.pdb
+H:\guolirongmvc\KOTest\KOTest.Service\bin\Release\EntityFramework.dll
+H:\guolirongmvc\KOTest\KOTest.Service\bin\Release\KOTest.Repository.dll
+H:\guolirongmvc\KOTest\KOTest.Service\bin\Release\KOTest.Repository.pdb
+H:\guolirongmvc\KOTest\KOTest.Service\bin\Release\EntityFramework.xml
+H:\guolirongmvc\KOTest\KOTest.Service\bin\Release\zh-Hans\EntityFramework.resources.dll
+H:\guolirongmvc\KOTest\KOTest.Service\obj\Release\KOTest.Service.csprojResolveAssemblyReference.cache
+H:\guolirongmvc\KOTest\KOTest.Service\obj\Release\KOTest.Service.dll
+H:\guolirongmvc\KOTest\KOTest.Service\obj\Release\KOTest.Service.pdb

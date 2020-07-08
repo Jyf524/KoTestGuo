@@ -1,0 +1,175 @@
+﻿body {
+color: #999;
+    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+}
+.phone_padding {
+padding-left:20px;padding-right:20px;
+}
+.ellipsis_1 {
+display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-all;
+}
+.header_search {
+border-radius: 4px;
+    background-color: #f6f6f6;
+    width: 100%;
+    padding: 0px;
+    height: 32px !important;
+    line-height: 32px !important;
+    margin: 0px !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+    font-size: 14px;
+    text-indent: 10px;
+}
+.btn_PhoneOperation {
+    border: 0px;
+    text-shadow: none;
+    background: 0px;
+    font-weight: 500;
+    padding-left: 0px;
+     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+     /*-webkit-user-modify: read-write-plaintext-only;*/
+     outline: none;
+     height: 34px;
+    padding: 6px 12px;
+   font-size: 14px;
+    width:100%;color: #999;
+}
+.btn_sure {
+text-shadow: none;background-color: #ff8400;
+    color: #fff;display: block;
+    width: 98%;
+    height: 3rem;
+    font-size: 1.6rem;
+    margin: 0 auto; 
+    text-align: center;
+    border-radius: 2rem;
+    margin-bottom: 1rem;
+}
+.clearbtnborder {
+    border: 0px;
+    text-shadow: none;
+    background: 0px;
+    padding-left: 0px;
+     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+     -webkit-user-modify: read-write-plaintext-only;
+     outline: none;
+}
+.puff_right{
+padding: .3rem 1.6rem;
+    color: #21568F;
+    border: .1rem #EFEFEF solid;
+    border-radius: 1rem;
+    background-color: #F6F6F6;
+    float:right;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+}
+.text_change {
+        /*display: inline-block;
+        text-align: left;*/
+    }
+ol, ul {
+    list-style: none;
+}
+.interest_list {
+    height: auto;
+    overflow: hidden;
+    padding: 1rem;
+}
+.interest_list ul li {
+    font-size: 1.2rem;
+    border-bottom: .1rem #ededed solid;
+    padding-bottom: 1.5rem;
+    margin-top: 1.5rem;
+    position: relative;
+    -webkit-animation-duration: 2s;
+}
+
+.bounceInLeft {
+    -webkit-animation-name: bounceInLeft;
+    animation-name: bounceInLeft;
+}
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+.clear_border {
+    border: none !important;
+}
+.interest_list a {
+    color: #000;
+}
+.list_r {
+    line-height: 2rem;
+}
+.list_r p {
+    color: #666;
+}
+.list_r p span {
+    margin-right: 1rem;
+    color: #000;
+}
+.useradmin {
+    position: absolute;
+    top: -.5rem;
+    right: 0rem;
+    padding-right: 1rem;
+}
+.useradmin i {
+    position: relative;
+    margin-left: 1rem;
+}
+.list_r i {
+    font-size: 3rem;
+    position: absolute;
+    right: 0rem;
+    top: .5rem;
+    color: #999;
+}
+.useradmin span {
+    padding: 0rem 1rem;
+    border: .1rem #ededed solid;
+    font-size: 1.2rem;
+    border-radius: 1rem;
+}
+/*.custom-file {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    margin-bottom: 0;
+}
+.custom-file-input {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    margin: 0;
+    opacity: 0;
+}
+.custom-file-label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    box-shadow: none;
+}*/

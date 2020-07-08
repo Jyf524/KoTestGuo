@@ -1,0 +1,224 @@
+﻿@{
+    ViewBag.Title = "班级管理";
+}
+
+
+<label>班级姓名:<input type="text" data-bind="value: StuNameSearch"/></label>
+<label>所属系部:
+    <select data-bind="value: DepartmentName">
+                            <option value="请选择">请选择</option>
+                          <option value="信息工程系">信息工程系</option>
+                          <option value="机电系">机电系</option>
+                            <option value="基础部">基础部</option>               
+                        </select>
+</label>
+<label>
+    <button id="Search" data-bind="click: Search">查询</button></label>
+<label> <button id="btn_add" type="button" data-bind="click:ClassAdd">添加</button></label>
+<table id="theader">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>班级名</th>
+            <th>所属系部</th>
+              <th>专业</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: people">
+        <tr id="Suttr">
+            <td data-bind="text: ClassID"></td>
+            <td data-bind="text: ClassName"></td>
+            <td data-bind="text: DepartmentName"></td>
+             <td data-bind="text: MajorName"></td>
+            <td>
+                <button id="btn_edit" type="button" data-bind="click: $parent.Detail">编辑</button>
+                <button data-bind="click: $parent.removePerson">删除</button></td>
+
+        </tr>
+    </tbody>
+</table>
+<div data-bind="text: fy">
+    </div>
+    <input type="text" hidden="hidden" data-bind="value: page"/>
+    <div>
+        <button type="button" style="border: 0; background: none" data-bind="click: BtnFirst">首页</button>
+        <button type="button" style="border: 0; background: none" data-bind="click: BtnUp">上一页</button>
+        <button type="button" style="border: 0; background: none" data-bind="click: BtnDown">下一页</button>
+        <button type="button" style="border: 0; background: none" data-bind="click: BtnLast">尾页</button>
+    </div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">操作</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="txt_Name">班级姓名</label>
+                    <input type="text" name="txt_Name" data-bind="value: ClassNameEdit" class="form-control" id="txt_Name" placeholder="班级姓名">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" id="btn_submit" class="btn btn-primary" data-bind="click: Save">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabelAdd">操作</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="txt_NameAdd">班级姓名</label>
+                        <input type="text" data-bind="value: ClassNameAdd" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_NameAdd">所属系部</label>
+                        <label class="form-control" style="border: none">
+                           <select data-bind="value: DepartmentNameAdd">
+                            <option value="请选择">请选择</option>
+                          <option value="信息工程系">信息工程系</option>
+                          <option value="机电系">机电系</option>
+                            <option value="基础部">基础部</option>               
+                        </select></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_NameAdd">专业名称</label>
+                        <input type="text" data-bind="value: MajorNameAdd" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" id="btn_submitAdd" class="btn btn-primary" data-bind="click: BtnAdd">添加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+    var resultValue;
+    var DetailID;
+    $(function () {
+        IndexAjax();
+    });
+   
+    var AppViewModel={
+        people: ko.observableArray(""),
+        StuNameSearch: ko.observable(""),
+        DepartmentName: ko.observable(""),
+        Search: function () {
+            IndexAjax();
+        },
+        Detail: function () {     
+            $('#myModal').modal('show'); 
+            DetailID = this.ClassID;
+            $.get('@Url.Action("ClassInfoEditGet", "ClassMent")', { ClassID: DetailID },
+              function (data) {
+                  console.log(data);
+                  if (data != null) {
+                      AppViewModel.ClassNameEdit(data.ClassName);
+                  }
+                  else {
+                      alert("发生错误！");
+                      return false;
+                  }
+                  
+              });
+           },
+        Save: function () {
+            $.post('@Url.Action("ClassInfoEditPost", "ClassMent")', { ClassID: DetailID, ClassName: AppViewModel.ClassNameEdit },
+              function (data) {
+                  alert(data);
+                  if (data === "修改成功！") {
+                      $('#myModal').modal('hide');
+                      IndexAjax();
+                  }
+              });
+            },
+        ClassNameEdit: ko.observable(""),
+        removePerson: function () {
+            if (confirm("确认删除吗?")) {
+                $.post('@Url.Action("ClassInfoMentDelete", "ClassMent")', { ClassID: this.ClassID },
+             function (data) {
+                 alert(data);
+                 IndexAjax();
+             });
+            }
+            
+
+        },
+        fy: ko.observable(""),
+        page: ko.observable("1"),
+        BtnFirst: function () {
+            AppViewModel.page("1");
+            IndexAjax();
+        },
+        BtnUp: function () {
+            AppViewModel.page(resultValue.NowPage <= 1 ? resultValue.NowPage : resultValue.NowPage - 1);
+            IndexAjax();
+        },
+        BtnDown: function () {
+            AppViewModel.page(resultValue.NowPage >= resultValue.AllPage ? resultValue.NowPage : resultValue.NowPage + 1);
+            IndexAjax();
+        },
+        BtnLast: function () {
+            AppViewModel.page(resultValue.AllPage);
+            IndexAjax();
+        },
+        ClassAdd: function () {
+            $('#myModalAdd').modal('show');
+        },
+        ClassNameAdd: ko.observable(""),
+        DepartmentNameAdd: ko.observable(""),
+        MajorNameAdd:ko.observable(""),
+        BtnAdd: function () {
+            $.post('@Url.Action("ClassInfoAdd", "ClassMent")', { ClassName: AppViewModel.ClassNameAdd, DepartmentName: AppViewModel.DepartmentNameAdd, MajorName: AppViewModel.MajorNameAdd },
+               function (data) {
+                   alert(data);
+                   if (data === "班级添加成功！") {
+                       $('#myModalAdd').modal('hide');
+                       IndexAjax();
+                   }
+               });
+         }
+    };
+
+    ko.applyBindings(AppViewModel);
+
+    function IndexAjax() {
+        $.ajax({
+            url: '@Url.Action("ClassInfoMentList", "ClassMent")',
+            type: "get",
+            data: { ClassName: AppViewModel.StuNameSearch, DepartmentName: AppViewModel.DepartmentName, page: AppViewModel.page },
+            success: function (data, stutas, xhr) {
+                console.table(data);
+                resultValue = data;
+                AppViewModel.people(data.ClassList);
+
+                if (Number(data.CountPage) != 0) {
+                    AppViewModel.fy("当前第：" + data.NowPage + "页  ，总共：" + data.AllPage + "页");
+                    console.log(Number(data.CountPage));
+                }
+                else {
+                    AppViewModel.fy("暂无数据！");
+                    console.log(Number(data.CountPage));
+                }
+            },
+
+            error: function (jqXHR, textStatus, errorThrown) {
+                /*弹出jqXHR对象的信息*/
+                console.log(jqXHR.responseText, jqXHR.status, jqXHR.readyState, jqXHR.statusText, textStatus, errorThrown);
+            }
+        });
+    }
+</script>
+

@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "CourseMentAdd";
+}
+
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h4 class="page-title col-12">
+                <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                    <i class="mdi mdi-bank"></i>
+                </span>
+                课程信息管理>新增课程
+            </h4>
+        </div>
+
+        <div class="form-horizontal" style="padding: 54px 9px 0px 198px">
+
+
+
+
+
+
+
+
+
+          
+
+ <div class="form-group">
+    <label  class="col-sm-1 control-label">课程图片</label>
+    <div class="col-sm-9">
+         <div id="uploadArea">
+                            <div style="display: flex;">
+                                <div id="imagePicker">选择图片</div>
+                                <button id="sureUpload">
+                                    确认上传
+                                </button>
+                            </div>
+                            <ul id="imagesList">
+                            </ul>
+                        </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label  class="col-sm-1 control-label">编号<label style="color:red;">*</label></label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control"  placeholder="不可重复" data-bind="value: CourseNumberAdd">
+    </div>
+  </div>
+  <div class="form-group" style=" margin-top: 2%;">
+    <label class="col-sm-1 control-label">名称<label style="color:red;">*</label></label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control"  placeholder="名称" data-bind="value: CourseNameAdd">
+    </div>
+        <label  class="col-sm-1 control-label">全称<label style="color:red;">*</label></label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control"  placeholder="全称" data-bind="value: FullNameAdd">
+    </div>
+  </div>
+             <div class="form-group"style=" margin-top: 2%;" >
+    <label  class="col-sm-1 control-label">首拼<label style="color:red;">*</label></label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control"  placeholder="首拼" data-bind="value: FirstSpellingAdd">
+    </div>
+        <label  class="col-sm-1 control-label">全拼<label style="color:red;">*</label></label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control"  placeholder="全拼" data-bind="value: AllSpellingAdd">
+    </div>
+  </div>  
+            <div class="form-group" style=" margin-top: 2%;">
+                <label  class="col-sm-1 control-label">类型<label style="color:red;">*</label></label>
+                 <div class="col-sm-4">
+            <select class="form-control" data-bind="value: CourseKindAdd">
+           <option value="请选择">请选择</option>
+                          <option value="艺术">艺术</option>
+                          <option value="文化">文化</option>
+                            <option value="基础">基础</option>    
+        </select></div>
+                 <label  class="col-sm-1 control-label">系部</label>
+                 <div class="col-sm-4">
+            <select class="form-control" data-bind="value: DepartmentNameAdd">
+         <option value="请选择">请选择</option>
+                          <option value="信息工程系">信息工程系</option>
+                          <option value="机电系">机电系</option>
+                            <option value="基础部">基础部</option>    
+        </select></div>
+                </div>
+
+            <div class="form-group" style=" margin-top: 2%;">
+    <label  class="col-sm-1 control-label">简介</label>
+    <div class="col-sm-9">
+     <textarea class="form-control" rows="5" data-bind="value: IntroductionAdd"></textarea>
+    </div>
+  </div>
+           
+  <div class="form-group" style="float:right; margin-right:18%;">
+    <div class="col-sm-offset-2 col-sm-12">
+      <button type="submit" class="btn btn-info" data-bind="click: BtnAdd">保存</button>
+         <button type="submit" class="btn btn-info">保存并继续</button>
+        <button type="submit" class="btn btn-default">取消</button>
+    </div>
+  </div>
+</div>
+
+        <div>
+        </div>
+    </div>
+
+<script type="text/javascript">    var AppViewModel = {
+               CourseNumberAdd: ko.observable(""),        CourseNameAdd: ko.observable(""),        FullNameAdd: ko.observable(""),        FirstSpellingAdd: ko.observable(""),        AllSpellingAdd: ko.observable(""),        CourseKindAdd: ko.observable(""),        DepartmentNameAdd: ko.observable(""),        IntroductionAdd: ko.observable(""),        BtnAdd: function () {
+            $.post('@Url.Action("CourseInfoAdd", "CourseMent")', {
+                CourseNumber: AppViewModel.CourseNumberAdd,                CourseName: AppViewModel.CourseNameAdd,
+                FullName: AppViewModel.FullNameAdd,
+                FirstSpelling: AppViewModel.FirstSpellingAdd,
+                AllSpelling: AppViewModel.AllSpellingAdd,
+                CourseKind: AppViewModel.CourseKindAdd,
+                DepartmentName: AppViewModel.DepartmentNameAdd,
+                Introduction: AppViewModel.IntroductionAdd
+            },               function (data) {
+                   alert(data);                   if (data === "课程添加成功！") {
+                       window.location.href = '../KoTest/CourseMentIndex';
+                   }
+               });
+        }
+    };    ko.applyBindings(AppViewModel);  </script>

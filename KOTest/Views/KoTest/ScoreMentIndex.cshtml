@@ -1,0 +1,221 @@
+﻿@{
+    ViewBag.Title = "ScoreMentIndex";
+}
+
+    <div style="margin-top: 70px">
+        <div class="page-header">
+            <h3 class="page-title col-12" style="font-size: 1.2em">
+                <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                    <i class="mdi mdi-bank"></i>
+                </span>
+                成绩信息管理
+            </h3>
+        </div>
+
+        <div class="form-inline">
+            <div class="col-md-1  col-xs-5" style="font-size: 16px; text-align: center">
+                学生名:
+            </div>
+            <div class="col-md-2  col-xs-5" style="font-size: 16px;">
+                <input type="text" placeholder="请输入学生名" class="form-control" data-bind="value:StudentNameSearch" />
+            </div>
+            <div class="col-md-1  col-xs-5" style="font-size: 16px; text-align: center">
+                课程名:
+            </div>
+            <div class="col-md-2  col-xs-5" style="font-size: 16px;">
+                <input type="text" placeholder="请输入课程名" class="form-control" data-bind="value:CourseNameSearch" />
+            </div>
+            <div class="col-md-2  col-xs-2">
+                <button id="Search" data-bind="click:Search" class="btn btn-info" style="background-color: #62a6e9">查询</button>
+                <button id="Save" data-bind="click:Save" class="btn btn-info" style="background-color: #62a6e9">暂存</button>
+                <button id="Saveok" data-bind="click:Saveok" class="btn btn-info" style="background-color: #62a6e9">提交</button>
+                <button id="BatchAdd" data-bind="click:BatchAdd" class="btn btn-info" style="background-color: #62a6e9">成绩导入</button>
+            </div>
+        </div>
+
+    </div>
+    <table id="theader" class="table" style="width: 100%">
+        <thead>
+            <tr>
+                <th style="text-align: center;">序号</th>
+                <th style="text-align: center;">姓名</th>
+                <th style="text-align: center;">身份证号</th>
+                 <th style="text-align: center;">课程名</th>
+                <th style="text-align: center; width: 200px;">平时成绩(30%)</th>
+                <th style="text-align: center; width: 200px;">期中成绩(30%)</th>
+                <th style="text-align: center; width: 200px;">期末成绩(40%)</th>
+                <th style="text-align: center; width: 250px;">缺勤课时数(本学期总课时数:<span style="color: #ff0000">80</span>)</th>
+                <th style="text-align: center;">总评</th>
+            </tr>
+        </thead>
+        <tbody id="box" data-bind="foreach: people">
+            <tr data-bind="value: ScoreID">
+                <td style="text-align: center;" data-bind="text: $index() + 1"></td>
+                <td style="text-align: center;" data-bind="text: UsersName"></td>
+                <td style="text-align: center;" data-bind="text: IdentityNumber"></td>
+                <td style="text-align: center;" data-bind="text: CourseName"></td>
+
+
+                <td style="text-align: center;">
+                    <div data-bind="if: ScoreState">
+                      <span data-bind="text: DailyScore"></span>
+                    </div>
+                     <div data-bind="ifnot: 1>0">
+                      123123123
+                    </div>
+                      <div data-bind="if: 1 > 0">
+                      123123123
+                    </div>
+                    <div data-bind="ifnot: ScoreState">
+                        <input type="text" class="form-control" name="ScoreID"  id="ScoreID" data-bind="value: ScoreID" style="display:none" hidden="hidden" />
+                        <input type="text" class="form-control"  id="DailyScore" name="DailyScore" data-bind="value: DailyScore" />
+                    </div>
+                </td>
+
+                 <td style="text-align: center;">
+                    <div data-bind="if: ScoreState">
+                      <span data-bind="text: InterimScore"></span>
+                    </div>
+                    <div data-bind="ifnot: ScoreState">
+                        <input type="text" class="form-control"  id="InterimScore" name="InterimScore" data-bind="value: InterimScore" />
+                    </div>
+                </td>
+
+                <td style="text-align: center;">
+                    <div data-bind="if: ScoreState">
+                      <span data-bind="text: EndScore"></span>
+                    </div>
+                    <div data-bind="ifnot: ScoreState">
+                        <input type="text" class="form-control"  id="EndScore" name="EndScore" data-bind="value: EndScore" />
+                    </div>
+                </td>
+
+               <td style="text-align: center;">
+                    <div data-bind="if: ScoreState">
+                      <span data-bind="text: AbsenceClass"></span>
+                    </div>
+                    <div data-bind="ifnot: ScoreState">
+                        <input type="text" class="form-control"  id="AbsenceClass" name="AbsenceClass" data-bind="value: AbsenceClass" />
+                    </div>
+                </td>
+
+              
+                <td style="text-align: center;">
+                       <span id="TotalScore" data-bind="text: AllComments" style="color: #ff0000"></span>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+      <div class="col-md-12 " style="text-align: center;">
+            <div data-bind="text: fy">
+            </div>
+            <input type="text" hidden="hidden" data-bind="value: page" />
+            <div>
+                <button type="button" style="border: 0; background: none" data-bind="click: BtnFirst">首页</button>
+                <button type="button" style="border: 0; background: none" data-bind="click: BtnUp">上一页</button>
+                <button type="button" style="border: 0; background: none" data-bind="click: BtnDown">下一页</button>
+                <button type="button" style="border: 0; background: none" data-bind="click: BtnLast">尾页</button>
+            </div>
+        </div>
+
+    <script type="text/javascript">
+
+        var arrScoreID = [];
+        var arrDailyScore = [];
+        var arrInterimScore = [];
+        var arrEndScore = [];
+        var arrAbsenceClass = [];
+
+        var ScoreIDVal; 
+        var DailyScoreVal;     
+        var InterimScoreVal;     
+        var EndScoreVal;    
+        var AbsenceClassVal;
+
+        $(function () {
+            IndexAjax();
+        });
+
+        var AppViewModel = {
+            people: ko.observableArray(""),
+            StudentNameSearch: ko.observable(""),
+            CourseNameSearch: ko.observable(""),
+            ScoreID: ko.observable(""),
+            DailyScore: ko.observable(""),
+            InterimScore: ko.observable(""),
+            EndScore: ko.observable(""),
+            AbsenceClass: ko.observable(""),
+            BatchAdd: function () {
+            },
+            Search: function () {
+                AppViewModel.page("1");
+                IndexAjax();
+
+            },
+            fy: ko.observable(""),            page: ko.observable("1"),            BtnFirst: function () {
+                AppViewModel.page("1");                IndexAjax();
+            },            BtnUp: function () {
+                AppViewModel.page(resultValue.NowPage <= 1 ? resultValue.NowPage : resultValue.NowPage - 1);                IndexAjax();
+            },            BtnDown: function () {
+                AppViewModel.page(resultValue.NowPage >= resultValue.AllPage ? resultValue.NowPage : resultValue.NowPage + 1);                IndexAjax();
+            },            BtnLast: function () {
+                AppViewModel.page(resultValue.AllPage);                IndexAjax();
+            },
+            Save: function () {
+                ArrayAdd();
+                if (arrScoreID.length != 0) {
+                    $.post('@Url.Action("ScoreTemporarySave", "Score")', { arrScoreID: arrScoreID.toString(), arrDailyScore: arrDailyScore.toString(), arrInterimScore: arrInterimScore.toString(), arrEndScore: arrEndScore.toString(), arrAbsenceClass: arrAbsenceClass.toString() },
+                        function (data) {
+                            alert(data);
+                            AppViewModel.page("1");
+                            IndexAjax();
+                        }
+                )
+                }
+            },
+            Saveok: function () {
+                ArrayAdd();
+                if (arrScoreID.length != 0) {
+                    $.post('@Url.Action("ScoreRealSave", "Score")', { arrScoreID: arrScoreID.toString(), arrDailyScore: arrDailyScore.toString(), arrInterimScore: arrInterimScore.toString(), arrEndScore: arrEndScore.toString(), arrAbsenceClass: arrAbsenceClass.toString() },
+                     function (data) {
+                         alert(data);
+                         AppViewModel.page("1");
+                         IndexAjax();
+                     }
+             )
+                }
+            }
+        };
+        ko.applyBindings(AppViewModel);
+
+        function IndexAjax() {
+            $.ajax({
+                url: '@Url.Action("ScoreList", "Score")',        type: "get",        data: { UsersName: AppViewModel.StudentNameSearch, CourseName: AppViewModel.CourseNameSearch,page: AppViewModel.page },        success: function (data, stutas, xhr) {
+            console.table(data);            resultValue = data;            AppViewModel.people(data.ScoreList);            if (Number(data.CountPage) != 0) {
+                AppViewModel.fy("当前第：" + data.NowPage + "页  ，总共：" + data.AllPage + "页");                console.log(Number(data.CountPage));
+            }            else {
+                AppViewModel.fy("暂无数据！");                console.log(Number(data.CountPage));
+            }
+        },        error: function (jqXHR, textStatus, errorThrown) {            /*弹出jqXHR对象的信息*/            console.log(jqXHR.responseText, jqXHR.status, jqXHR.readyState, jqXHR.statusText, textStatus, errorThrown);
+        }
+    });
+        }
+
+        function ArrayAdd() {
+
+            ScoreIDVal = document.getElementsByName('ScoreID');
+            DailyScoreVal = document.getElementsByName('DailyScore');
+            InterimScoreVal = document.getElementsByName('InterimScore');
+            EndScoreVal = document.getElementsByName('EndScore');
+            AbsenceClassVal = document.getElementsByName('AbsenceClass');
+
+            for (var i = 0; i < ScoreIDVal.length ; i++) {
+                arrScoreID.push(ScoreIDVal[i].value);
+                arrDailyScore.push(DailyScoreVal[i].value);
+                arrInterimScore.push(InterimScoreVal[i].value);
+                arrEndScore.push(EndScoreVal[i].value);
+                arrAbsenceClass.push(AbsenceClassVal[i].value);
+            }
+        }
+    </script>
